@@ -35,12 +35,12 @@
 
 typedef struct{
 	volatile uint32_t CR[2];	/*!< GPIO port configuration register LOW & HIGH,		address offset:	0x00 (LOW) 0x04 (HIGH) */
-	volatile uint32_t dummy;
+	volatile uint32_t dummy;	/*!< dummy is placed here to replace the other register in between CR and ODR*/
 	volatile uint32_t ODR;		/*!< GPIO port output data register, 					address offset: 0x0C */
 }GPIO_TypeDef;
 
 typedef struct{
-	volatile uint32_t dummy[6];
+	volatile uint32_t dummy[6]; /*!< Dummy with an array of 6 replaces the 6 registers prior to APB2ENR */
 	volatile uint32_t APB2ENR; /*!< RCC APB2 peripheral clock enable register address offset: 0x18 */
 }RCC_TypeDef;
 

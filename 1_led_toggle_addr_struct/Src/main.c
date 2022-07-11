@@ -4,8 +4,29 @@
  * 	@author Nakseung Choi
  * 	@brief bare metal programming using structure
  * 	@Note
- * 	APB: advanced peripheral bus
- * 	AHB: advanced high-performance bus
+ * 	APB: Advanced Peripheral Bus
+ * 		- minimum of 2 clock cycles access to peripherals
+ *
+ * 	AHB: Advanced High-performance Bus
+ * 		- 1 clock cycle access to peripherals
+ *
+ * 	Direction Register
+ * 		- Set pin as input or output
+ *
+ * 	Data Register
+ * 		- Write to pin or read from pin.
+ *
+ * 	Three clock sources:
+ *
+ * 	On-Chip RC Oscillator
+ * 		- Least precise
+ *
+ * 	Externally Connected Crystal
+ * 		- Most precise
+ *
+ * 	Phase Locked Loop (PLL)
+ * 		- Programmable
+ *
  * 	1. where is the LED connected?
  * 	2. PA5 (pin21)
  * 	3. Search Memory Map in datasheet

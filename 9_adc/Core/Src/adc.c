@@ -33,34 +33,47 @@ void pa1_adc_init(void){
 	RCC->APB2ENR |= GPIOAEN;
 
 	/*Set the mode of PA1 to analog mode (CNF1 analog mode: 00, Mode1 Input mode: 00)*/
-	GPIOA->CRL &= ~(1U << 4);
-	GPIOA->CRL &= ~(1U << 5);
-	GPIOA->CRL &= ~(1U << 6);
-	GPIOA->CRL &= ~(1U << 7);
+//	GPIOA->CRL &= ~(1U << 4);
+//	GPIOA->CRL &= ~(1U << 5);
+//	GPIOA->CRL &= ~(1U << 6);
+//	GPIOA->CRL &= ~(1U << 7);
 
 	/*******Configure the ADC module*******/
+	/*Enable end of Conversion interrupt */
+	//ADC1->CR1 |= ADC_CR1_EOCIE;
+	//NVIC_EnableIRQ(ADC1_2_IRQn);
 	/*Enable clock access to ADC*/
 	RCC->APB2ENR |= ADC1EN;
+	//RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6;
+	//RCC->CFGR |= (1U << 15);
+	//RCC->CFGR |= (1U << 14);
 
 	/*Configure ADC parameters*/
+	//ADC1->CR2 = 0;
 	/*Conversion sequence start*/
-	ADC1->SQR3 = ADC_CH1;
+	ADC1->SQR3 |= ADC_SQR3_SQ1_0;
 
 	/*Conversion sequence length*/
 	ADC1->SQR1 = ADC_SEQ_LEN_1;
 
 
 	/*Enable ADC module*/
+
 	ADC1->CR2 |= CR2_ADON;
+
+	//ADC1->CR1 |= (1U << 5);
 
 }
 
 void start_conversion(void){
+	/*For STM32f103rb, ADON has to be enabled twice to start conversion.*/
+	ADC1->CR2 |= CR2_ADON;
 	/*Start ADC conversion*/
 	ADC1->CR2 |= CR2_SWSTART;
 }
 
 uint32_t adc_read(void){
+
 	/*Wait for conversion to be complete*/
 	while(!(ADC1->SR & SR_EOC)){}
 	/*Read converted results*/

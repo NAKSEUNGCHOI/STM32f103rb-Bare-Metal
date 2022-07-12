@@ -4,6 +4,7 @@
  * 	@author Nakseung Choi
  * 	@Brief UART
  * 	Alternate function I/O has to be enabled.
+ * 	Fixed Issue: CR2_ADON has to be enabled twice to start. (Once: wakes it up, twice: start of conversion)
  *
  */
 
@@ -17,9 +18,8 @@ uint32_t sensor_value = 0;
 
 int main(void){
 
-	pa1_adc_init();
 	uart2_tx_init();
-
+	pa1_adc_init();
 
 
 	while(1){

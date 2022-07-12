@@ -4,6 +4,7 @@
  * 	@author Nakseung Choi
  * 	@Brief UART
  * 	Alternate function I/O has to be enabled.
+ *
  */
 
 #include <stdio.h>

@@ -18,5 +18,5 @@
 ## Release Note
 
 - <pre>Error fixed 9_ADC          July-12/2022</pre>
-- Worked on 8_uart_rx         July-11-2022
-- Started                     July-09-2022
+- <pre>Worked on 8_uart_rx        July-11-2022</pre>
+- <pre>Started                    July-09-2022</pre>

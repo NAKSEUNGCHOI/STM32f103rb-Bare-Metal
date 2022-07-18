@@ -16,6 +16,7 @@
 - Download your board's header file so that you don't have to define all addresses every time you need to use them.
 
 ## Release Note
+- <pre> Systick and Timer Interrupt            July-18-2022</pre>
 - <pre> ADC Interrupt                          July-15-2022</pre> 
 - <pre> Error fixed 9_ADC                      July-12-2022</pre>
 - <pre> Worked on 8_uart_rx                    July-11-2022</pre>

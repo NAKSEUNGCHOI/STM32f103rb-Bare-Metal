@@ -1,9 +1,3 @@
-/*
- * uart.c
- *
- *  Created on: Jul 11, 2022
- *     Author: chlsk
- */
 #include "uart.h"
 
 #define GPIOAEN 			(1U << 2)				// TX/PB10, RX/PB11

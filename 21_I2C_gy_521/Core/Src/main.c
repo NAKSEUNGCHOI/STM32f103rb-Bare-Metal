@@ -15,50 +15,32 @@
 #include "systick.h"
 #include "tim.h"
 #include "exti.h"
+#include "i2c.h"
+#include "MPU6050.h"
 
-#define GPIOAEN				(1U << 2)
-#define PIN5				(1U << 5)
-#define LED_PIN				PIN5
+int16_t Accel_X_RAW, Accel_Y_RAW, Accel_Z_RAW;
+float Ax, Ay, Az;
 
-static void dma_callback(void);
+extern uint8_t data_rec[6];
 
 int main(void){
-	char message[31] = "Hello from Stm32 DMA transfer\n\r";
+	MPU6050_init();
 
-	/*1. Enable clock access to GPIOA*/
-	RCC->APB2ENR |= GPIOAEN;
-
-	/*2. Set PA5 as output pin*/
-	GPIOA->CRL &= ~(1U << 23);
-	GPIOA->CRL &= ~(1U << 22);
-	GPIOA->CRL |= (1U << 21);
-	GPIOA->CRL &= ~(1U << 20);
-
-	uart2_tx_init();
-	dma1_ch7_init((uint32_t)message, (uint32_t)&USART2->DR, 31);
 
 
 	while(1){
+		MPU6050_read_values(ACCEL_XOUT_H_REG);
 
+		Accel_X_RAW = (int16_t)(data_rec[0] << 8 | data_rec[1]);
+		Accel_Y_RAW = (int16_t)(data_rec[2] << 8 | data_rec[3]);
+		Accel_Z_RAW = (int16_t)(data_rec[4] << 8 | data_rec[5]);
+
+		Ax = (Accel_X_RAW/16384.0);
+		Ay = (Accel_Y_RAW/16384.0);
+		Az = (Accel_Z_RAW/16384.0);
 	}
 
 
 }
-static void dma_callback(void){
 
-		GPIOA->ODR |= LED_PIN;
-
-}
-
-void DMA1_Channel7_IRQHandler(void){
-	/*1. Check for transfer complete interrupt*/
-	if(DMA1->ISR & DMA_ISR_TCIF7){
-
-		/*2. Clear flag */
-		DMA1->IFCR |= DMA_IFCR_CTCIF7;
-
-		/*3. Do something*/
-		dma_callback();
-	}
-}
 

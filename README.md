@@ -6,7 +6,6 @@
 ## Description
 - STM32f103rb Nucleo Bare-metal programming.
 - These should be good source codes/examples for those who study bare-metal programming with any STM32 board.
-- You just have to pay attention and read your board's reference manual thoroughly to implement the same functions on your board.
 
 ## Getting started
 

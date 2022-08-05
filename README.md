@@ -15,6 +15,9 @@
 - Download your board's header file so that you don't have to define all addresses every time you need to use them.
 
 ## Release Note
+
+- <pre> final commit                           July-21-2022</pre>
+- <pre> I2C interface with MPU6050             July-20-2022</pre>
 - <pre> Systick and Timer Interrupt            July-18-2022</pre>
 - <pre> ADC Interrupt                          July-15-2022</pre> 
 - <pre> Error fixed 9_ADC                      July-12-2022</pre>
